@@ -7,7 +7,6 @@ import {
   SafeAreaView,
   TextInput,
   List,
-  Switch,
 } from "react-native";
 
 import { ListItem, CheckBox } from "react-native-elements";
@@ -23,6 +22,26 @@ export default class App extends React.Component {
   changingVal = (text) => {
     this.setState({ inputText: text });
   };
+
+  buttonValChange =(todo) => {
+    this.setState(prevState => {
+      let existingTodoIndex = prevState.todos.findIndex(
+        (element) => element === todo
+      );
+      let clonedTodo = { ...prevState.todos[existingTodoIndex] };
+      if (clonedTodo.icon === true) {
+        clonedTodo.icon = false;
+      } else if (clonedTodo.icon !== true) {
+        clonedTodo.icon = true;
+      }
+
+      let newState = [...prevState.todos];
+
+      newState.splice(existingTodoIndex, 1, clonedTodo);
+
+      return { todos: newState };
+    })
+  }
 
   createTodo = (val) => {
     this.setState((currentState) => ({
@@ -56,12 +75,12 @@ export default class App extends React.Component {
               <>
                 
                 <ListItem
-                  switch={{value: todo.icon, }}
+                  style={{textDecorationLine: "line-through"}}
+                  switch={{value: todo.icon, onValueChange: () => this.buttonValChange(todo)}}
                   key={todo.id}
                   title={todo.value}
                   bottomDivider
-                  
-                />
+                ></ListItem>
               </>
             ))}
           </View>
