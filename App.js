@@ -75,10 +75,10 @@ export default class App extends React.Component {
               <>
                 
                 <ListItem
-                  style={{textDecorationLine: "line-through"}}
                   switch={{value: todo.icon, onValueChange: () => this.buttonValChange(todo)}}
                   key={todo.id}
                   title={todo.value}
+                  titleStyle={todo.icon === true ? {textDecorationLine: "line-through", color: "lightgrey"} : ""}
                   bottomDivider
                 ></ListItem>
               </>
