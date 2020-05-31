@@ -7,6 +7,8 @@ import {
   SafeAreaView,
   TextInput,
   List,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 
 import { ListItem, CheckBox } from "react-native-elements";
@@ -68,44 +70,47 @@ export default class App extends React.Component {
   render() {
     return (
       <>
-        <SafeAreaView style={styles.container}>
-          <Text style={styles.text}>rep🔥irs</Text>
-          <View>
-            <TextInput
-              style={styles.textField}
-              value={this.state.inputText}
-              onChangeText={(text) => this.changingVal(text)}
-              onSubmitEditing={this.submittionUpdate}
-            />
-            {this.state.todos.map((todo) => (
-              <>
-                <ListItem
-                  switch={{
-                    value: todo.icon,
-                    onValueChange: () => this.buttonValChange(todo),
-                  }}
-                  key={this.id}
-                  title={todo.value}
-                  titleStyle={
-                    todo.icon === true
-                      ? {
-                          textDecorationLine: "line-through",
-                          color: "lightgrey",
-                        }
-                      : ""
-                  }
-                  rightIcon={{
-                    name: "trash",
-                    type: "font-awesome",
-                    color: "#f50",
-                    onPress: () => this.deleteItem(todo),
-                  }}
-                  bottomDivider
-                ></ListItem>
-              </>
-            ))}
-          </View>
-        </SafeAreaView>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <SafeAreaView style={styles.container}>
+              <Text style={styles.text}>rep🔥irs</Text>
+              <View>
+                <TextInput
+                  style={styles.textField}
+                  value={this.state.inputText}
+                  onChangeText={(text) => this.changingVal(text)}
+                  onSubmitEditing={this.submittionUpdate}
+                  placeholder="Please enter the repair here..."
+                />
+                {this.state.todos.map((todo) => (
+                  <>
+                    <ListItem
+                      switch={{
+                        value: todo.icon,
+                        onValueChange: () => this.buttonValChange(todo),
+                      }}
+                      key={this.id}
+                      title={todo.value}
+                      titleStyle={
+                        todo.icon === true
+                          ? {
+                              textDecorationLine: "line-through",
+                              color: "lightgrey",
+                            }
+                          : ""
+                      }
+                      rightIcon={{
+                        name: "trash",
+                        type: "font-awesome",
+                        color: "#f50",
+                        onPress: () => this.deleteItem(todo),
+                      }}
+                      bottomDivider
+                    ></ListItem>
+                  </>
+                ))}
+              </View>
+            </SafeAreaView>
+        </TouchableWithoutFeedback>
       </>
     );
   }
@@ -119,14 +124,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffe8e8",
   },
   text: {
-    fontSize: 50,
+    fontSize: 70,
     color: "#af2f2f59",
   },
   textField: {
-    flex: 0.2,
+    flex: 0.24,
     borderWidth: 0.2,
     width: 300,
     marginTop: 30,
     borderColor: "black",
+    paddingLeft: 7,
   },
 });
