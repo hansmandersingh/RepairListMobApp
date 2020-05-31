@@ -23,8 +23,8 @@ export default class App extends React.Component {
     this.setState({ inputText: text });
   };
 
-  buttonValChange =(todo) => {
-    this.setState(prevState => {
+  buttonValChange = (todo) => {
+    this.setState((prevState) => {
       let existingTodoIndex = prevState.todos.findIndex(
         (element) => element === todo
       );
@@ -40,8 +40,8 @@ export default class App extends React.Component {
       newState.splice(existingTodoIndex, 1, clonedTodo);
 
       return { todos: newState };
-    })
-  }
+    });
+  };
 
   createTodo = (val) => {
     this.setState((currentState) => ({
@@ -51,6 +51,12 @@ export default class App extends React.Component {
       ],
     }));
   };
+
+  deleteItem = (val) => {
+    this.setState((currentState) => ({
+      todos: currentState.todos.filter((todo) => todo !== val),
+    }));
+  }
 
   submittionUpdate = (e) => {
     e.preventDefault();
@@ -73,12 +79,27 @@ export default class App extends React.Component {
             />
             {this.state.todos.map((todo) => (
               <>
-                
                 <ListItem
-                  switch={{value: todo.icon, onValueChange: () => this.buttonValChange(todo)}}
-                  key={todo.id}
+                  switch={{
+                    value: todo.icon,
+                    onValueChange: () => this.buttonValChange(todo),
+                  }}
+                  key={this.id}
                   title={todo.value}
-                  titleStyle={todo.icon === true ? {textDecorationLine: "line-through", color: "lightgrey"} : ""}
+                  titleStyle={
+                    todo.icon === true
+                      ? {
+                          textDecorationLine: "line-through",
+                          color: "lightgrey",
+                        }
+                      : ""
+                  }
+                  rightIcon={{
+                    name: "trash",
+                    type: "font-awesome",
+                    color: "#f50",
+                    onPress: () => this.deleteItem(todo),
+                  }}
                   bottomDivider
                 ></ListItem>
               </>
