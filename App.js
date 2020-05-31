@@ -79,16 +79,20 @@ export default class App extends React.Component {
                   value={this.state.inputText}
                   onChangeText={(text) => this.changingVal(text)}
                   onSubmitEditing={this.submittionUpdate}
-                  placeholder="Please enter the repair here..."
+                  placeholder={"Please enter the repair here..."}
                 />
-                {this.state.todos.map((todo) => (
+                {this.state.todos.map((todo, i) => (
                   <>
                     <ListItem
+                      style={{borderBottomColor: "black", marginTop: 3}}
+                      linearGradientProps={{
+                        colors: ['#ffe8e8', '#ffe8e8'],
+                      }}
                       switch={{
                         value: todo.icon,
                         onValueChange: () => this.buttonValChange(todo),
                       }}
-                      key={this.id}
+                      key={i}
                       title={todo.value}
                       titleStyle={
                         todo.icon === true
@@ -134,5 +138,6 @@ const styles = StyleSheet.create({
     marginTop: 30,
     borderColor: "black",
     paddingLeft: 7,
+    borderRadius: 10
   },
 });
