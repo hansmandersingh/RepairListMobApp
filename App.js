@@ -9,6 +9,7 @@ import {
   List,
   TouchableWithoutFeedback,
   Keyboard,
+  ScrollView,
 } from "react-native";
 
 import { ListItem, CheckBox } from "react-native-elements";
@@ -58,7 +59,7 @@ export default class App extends React.Component {
     this.setState((currentState) => ({
       todos: currentState.todos.filter((todo) => todo !== val),
     }));
-  }
+  };
 
   submittionUpdate = (e) => {
     e.preventDefault();
@@ -70,50 +71,59 @@ export default class App extends React.Component {
   render() {
     return (
       <>
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <TouchableWithoutFeedback>
           <SafeAreaView style={styles.container}>
-              <Text style={styles.text}>rep🔥irs</Text>
+            <Text style={styles.text}>rep🔥irs</Text>
+            <View style={{ flex: 1 }}>
+              <TextInput
+                style={styles.textField}
+                value={this.state.inputText}
+                onChangeText={(text) => this.changingVal(text)}
+                onSubmitEditing={this.submittionUpdate}
+                placeholder={"Please enter the repair here..."}
+              />
               <View>
-                <TextInput
-                  style={styles.textField}
-                  value={this.state.inputText}
-                  onChangeText={(text) => this.changingVal(text)}
-                  onSubmitEditing={this.submittionUpdate}
-                  placeholder={"Please enter the repair here..."}
-                />
-                {this.state.todos.map((todo, i) => (
-                  <>
-                    <ListItem
-                      style={{borderBottomColor: "black", marginTop: 3}}
-                      linearGradientProps={{
-                        colors: ['#ffe8e8', '#ffe8e8'],
-                      }}
-                      switch={{
-                        value: todo.icon,
-                        onValueChange: () => this.buttonValChange(todo),
-                      }}
-                      key={i}
-                      title={todo.value}
-                      titleStyle={
-                        todo.icon === true
-                          ? {
-                              textDecorationLine: "line-through",
-                              color: "lightgrey",
-                            }
-                          : ""
-                      }
-                      rightIcon={{
-                        name: "trash",
-                        type: "font-awesome",
-                        color: "#f50",
-                        onPress: () => this.deleteItem(todo),
-                      }}
-                      bottomDivider
-                    ></ListItem>
-                  </>
-                ))}
+                <ScrollView style={{ flex: 1 }}>
+                  {this.state.todos.map((todo, i) => (
+                    <>
+                      <ListItem
+                        style={{
+                          borderBottomColor: "black",
+                          marginTop: 3,
+                          height: 40,
+                          flex: 1,
+                        }}
+                        linearGradientProps={{
+                          colors: ["#ffe8e8", "#ffe8e8"],
+                        }}
+                        switch={{
+                          value: todo.icon,
+                          onValueChange: () => this.buttonValChange(todo),
+                        }}
+                        key={i}
+                        title={todo.value}
+                        titleStyle={
+                          todo.icon === true
+                            ? {
+                                textDecorationLine: "line-through",
+                                color: "lightgrey",
+                              }
+                            : ""
+                        }
+                        rightIcon={{
+                          name: "trash",
+                          type: "font-awesome",
+                          color: "#f50",
+                          onPress: () => this.deleteItem(todo),
+                        }}
+                        bottomDivider
+                      ></ListItem>
+                    </>
+                  ))}
+                </ScrollView>
               </View>
-            </SafeAreaView>
+            </View>
+          </SafeAreaView>
         </TouchableWithoutFeedback>
       </>
     );
@@ -132,12 +142,12 @@ const styles = StyleSheet.create({
     color: "#af2f2f59",
   },
   textField: {
-    flex: 0.24,
+    height: 40,
     borderWidth: 0.2,
     width: 300,
     marginTop: 30,
     borderColor: "black",
     paddingLeft: 7,
-    borderRadius: 10
+    borderRadius: 10,
   },
 });
