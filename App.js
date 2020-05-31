@@ -1,13 +1,24 @@
-import React from 'react';
-import { StyleSheet, Text, View, Button, SafeAreaView, TextInput } from 'react-native';
+import React from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  SafeAreaView,
+  TextInput,
+  List,
+  Switch,
+} from "react-native";
+
+import { ListItem, CheckBox } from "react-native-elements";
 
 export default class App extends React.Component {
   id = 0;
 
   state = {
     inputText: "",
-    todos: []
-  }
+    todos: [],
+  };
 
   changingVal = (text) => {
     this.setState({ inputText: text });
@@ -17,7 +28,7 @@ export default class App extends React.Component {
     this.setState((currentState) => ({
       todos: [
         ...currentState.todos,
-        { value: val, id: this.id++, checked: "" },
+        { value: val, id: this.id++, checked: "", icon: false },
       ],
     }));
   };
@@ -25,7 +36,7 @@ export default class App extends React.Component {
   submittionUpdate = (e) => {
     e.preventDefault();
     this.createTodo(this.state.inputText);
-    console.log(this.state.todos)
+    console.log(this.state.todos);
     this.setState({ inputText: "" });
   };
 
@@ -35,31 +46,47 @@ export default class App extends React.Component {
         <SafeAreaView style={styles.container}>
           <Text style={styles.text}>rep🔥irs</Text>
           <View>
-          <TextInput style={styles.textField} value={this.state.inputText} onChangeText={(text) => this.changingVal(text)} onSubmitEditing={this.submittionUpdate}/>
-        </View>
+            <TextInput
+              style={styles.textField}
+              value={this.state.inputText}
+              onChangeText={(text) => this.changingVal(text)}
+              onSubmitEditing={this.submittionUpdate}
+            />
+            {this.state.todos.map((todo) => (
+              <>
+                
+                <ListItem
+                  switch={{value: todo.icon, }}
+                  key={todo.id}
+                  title={todo.value}
+                  bottomDivider
+                  
+                />
+              </>
+            ))}
+          </View>
         </SafeAreaView>
-        
       </>
-    )
+    );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    backgroundColor: "#ffe8e8"
+    backgroundColor: "#fff",
+    alignItems: "center",
+    backgroundColor: "#ffe8e8",
   },
   text: {
     fontSize: 50,
     color: "#af2f2f59",
-  }, 
+  },
   textField: {
     flex: 0.2,
     borderWidth: 0.2,
     width: 300,
     marginTop: 30,
-    borderColor: "black"
-  }
+    borderColor: "black",
+  },
 });
