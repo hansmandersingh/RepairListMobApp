@@ -1,6 +1,10 @@
 # RepairListMobApp
 It's a port of repair list web app to react native app for iOS and android.(It's a test)
 
+## Screenshot
+
+![Screenshot] (/IMG_0241.PNG)
+
 ## How to use 
 
 Clone this repo and if you want to test the app cd to the cloned folder `npm install` and then run `npm start` and you will get option to run the app.
