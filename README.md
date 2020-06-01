@@ -3,7 +3,7 @@ It's a port of repair list web app to react native app for iOS and android.(It's
 
 ## Screenshot
 
-![Screenshot] (/IMG_0241.PNG)
+![Screenshot] ( ./IMG_0241.PNG )
 
 ## How to use 
 
