@@ -64,7 +64,6 @@ export default class App extends React.Component {
   submittionUpdate = (e) => {
     e.preventDefault();
     this.createTodo(this.state.inputText);
-    console.log(this.state.todos);
     this.setState({ inputText: "" });
   };
 
@@ -87,6 +86,7 @@ export default class App extends React.Component {
                   {this.state.todos.map((todo, i) => (
                     <>
                       <ListItem
+                        key={this.id}
                         style={{
                           borderBottomColor: "black",
                           marginTop: 3,
@@ -100,7 +100,6 @@ export default class App extends React.Component {
                           value: todo.icon,
                           onValueChange: () => this.buttonValChange(todo),
                         }}
-                        key={i}
                         title={todo.value}
                         titleStyle={
                           todo.icon === true
