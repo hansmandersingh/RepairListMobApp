@@ -22,8 +22,13 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.bhinderhans.myFirstApp"
     },
-    "description": ""
+    "description": "",
+    "android": {
+      "package": "com.hans.repairsapp"
+    },
+    "entryPoint": "node_modules/expo/AppEntry.js"
   }
 }
