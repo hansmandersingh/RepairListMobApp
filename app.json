@@ -22,9 +22,20 @@
       "**/*"
     ],
     "ios": {
+<<<<<<< HEAD
       "supportsTablet": true,
       "bundleIdentifier": "com.hans.repairApp"
+||||||| merged common ancestors
+      "supportsTablet": true
+=======
+      "supportsTablet": true,
+      "bundleIdentifier": "com.bhinderhans.myFirstApp"
+>>>>>>> eff5b7c3d27903b2bed5519a609cb4956d953977
     },
-    "description": ""
+    "description": "",
+    "android": {
+      "package": "com.hans.repairsapp"
+    },
+    "entryPoint": "node_modules/expo/AppEntry.js"
   }
 }
